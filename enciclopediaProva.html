@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco Parole - Enciclopedia Trentine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-header" style="padding-bottom: 20px;">
+        <nav class="navbar">
+            <div class="logo"><strong>CLSW</strong></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="enciclopedia.html" style="font-weight: 700; color: var(--blu-bottoni);">Enciclopedia</a></li>
+                <li><a href="traduttore.html">Traduttore</a></li>
+                <li><a href="https://www.instagram.com/trentino_pills/" target="_blank" class="pill-btn">@ trentino_pills 💙</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero-section" style="padding-top: 10px;">
+            <h1 style="font-size: 2.5rem;">Elenco Parole</h1>
+            
+            <div class="search-box">
+                <select class="search-select">
+                    <option>Tutti i tipi</option>
+                </select>
+                <input type="text" id="searchInput" class="search-input" placeholder="Cerca una parola in dialetto o italiano...">
+                <button class="btn-cerca">CERCA</button>
+            </div>
+        </section>
+    </div>
+
+    <main class="container layout-elenco">
+        <aside class="sidebar-filtri">
+            <div class="card-white">
+                <div class="filter-group">
+                    <h4>Filtra per tipo</h4>
+                    <label class="checkbox-label">
+                        <span><input type="checkbox" checked> Sostantivo</span>
+                        <span style="color: var(--grigio-testo); font-size: 0.8rem;">21,473</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <span><input type="checkbox"> Aggettivo</span>
+                        <span style="color: var(--grigio-testo); font-size: 0.8rem;">4,328</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <span><input type="checkbox"> Verbo</span>
+                        <span style="color: var(--grigio-testo); font-size: 0.8rem;">1,219</span>
+                    </label>
+                </div>
+                <div class="filter-group">
+                    <h4>Ordina per:</h4>
+                    <select style="width: 100%; padding: 8px; border: 1px solid var(--bordo-leggero); border-radius: 6px;">
+                        <option>Alfabeto A-Z</option>
+                    </select>
+                </div>
+            </div>
+        </aside>
+
+        <section class="card-white" style="padding: 0; overflow: hidden;">
+            <div class="word-row header-row">
+                <div>Dialetto</div>
+                <div>Italiano</div>
+                <div>Tipo</div>
+                <div></div> </div>
+            
+            <div id="wordsContainer"></div>
+        </section>
+    </main>
+
+    <script>
+        // Array dei termini (basato sull'immagine del tuo mockup)
+        const parole = [
+            { dialetto: "Agiia", italiano: "Aglio", tipo: "Sostantivo" },
+            { dialetto: "Altro", italiano: "Altro", tipo: "Aggettivo" },
+            { dialetto: "Bagola", italiano: "Fregnaccia", tipo: "Sostantivo" },
+            { dialetto: "Balin", italiano: "Pasticcino", tipo: "Sostantivo" },
+            { dialetto: "Barola", italiano: "Bottiglia", tipo: "Sostantivo" },
+            { dialetto: "Brenta", italiano: "Botte", tipo: "Sostantivo" },
+            { dialetto: "Ciacao", italiano: "Schiacciare", tipo: "Verbo" }
+        ];
+
+        const container = document.getElementById('wordsContainer');
+        const inputRicerca = document.getElementById('searchInput');
+
+        // Funzione per generare l'HTML della lista
+        function renderizzaParole(lista) {
+            container.innerHTML = ''; // Svuota la lista attuale
+            lista.forEach(parola => {
+                const riga = document.createElement('div');
+                riga.className = 'word-row';
+                riga.innerHTML = `
+                    <div class="col-dialetto">${parola.dialetto}</div>
+                    <div style="color: #475569;">${parola.italiano}</div>
+                    <div><span class="tag-tipo">${parola.tipo}</span></div>
+                    <div class="icon-audio">🔊</div>
+                `;
+                container.appendChild(riga);
+            });
+        }
+
+        // Mostra tutte le parole all'inizio
+        renderizzaParole(parole);
+
+        // Ascolta cosa digita l'utente e filtra l'array
+        inputRicerca.addEventListener('input', (e) => {
+            const testo = e.target.value.toLowerCase();
+            const paroleFiltrate = parole.filter(p => 
+                p.dialetto.toLowerCase().includes(testo) || 
+                p.italiano.toLowerCase().includes(testo)
+            );
+            renderizzaParole(paroleFiltrate);
+        });
+    </script>
+</body>
+</html>
