@@ -5,13 +5,19 @@
 /* ── SEZIONE RICERCA PRINCIPALE ── */
 #cerca {
   padding: var(--space-xl) 0;
-  background: var(--clr-cream);
+  background: transparent;
 }
 
 .search-wrapper {
   max-width: 720px;
   margin: 0 auto;
   text-align: center;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(113,86,57,.16);
+  box-shadow: 0 30px 70px rgba(0,0,0,.09);
+  backdrop-filter: blur(10px);
 }
 
 .search-intro {
