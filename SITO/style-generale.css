@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-image: url(Foto/sfondo.jpg);
+    font-family: 'Montserrat', sans-serif; /* Font moderno Montserrat */
 }
 
 header {
@@ -38,26 +39,25 @@ ul li a {
     padding: 14px 16px;
     text-decoration: none;
     color: black;
-    font-size: 22px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Roboto, 'Helvetica Neue', Helvetica, sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
 }
 
 ul li a:hover{
     text-decoration: underline;
     text-decoration-color: lightblue;
-    
 }
 
 .titolo{
     text-align: center;
     margin: 0;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Montserrat', sans-serif; /* Font moderno Montserrat */
 }
-
 
 .titolo h1{
     font-size: 100px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Montserrat', sans-serif; /* Font moderno Montserrat */
     font-weight: 500;
     text-align: center;
 
@@ -67,7 +67,7 @@ ul li a:hover{
 
 .titolo h3{
     font-size: 25px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Montserrat', sans-serif; /* Font moderno Montserrat */
     font-weight: lighter;
     text-align: center;
 
@@ -81,15 +81,11 @@ ul li a:hover{
     opacity: 75%;
     border-radius: 50px;
     margin-top: 30px;
-    
-    
     justify-items: center;
     justify-self: center;
     align-items: center;
     background-color: aliceblue;
 }
-
-/* style per pagina informazioni*/
 
 .pagINFO{
     width: 90%;
@@ -104,7 +100,6 @@ ul li a:hover{
     justify-self: center;
     align-items: center;
     background-color: aliceblue;
-
 }
 
 .pagINFO p{
@@ -112,7 +107,7 @@ ul li a:hover{
     margin-left: 20px;
     margin-top: 15px;
     margin-bottom: 0px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Montserrat', sans-serif; /* Font moderno Montserrat */
     font-size: 20px;
 }
 
@@ -121,6 +116,6 @@ ul li a:hover{
     margin-left: 20px;
     margin-top: 25px;
     margin-bottom: 0px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Montserrat', sans-serif; /* Font moderno Montserrat */
     font-size: 30px;
 }
