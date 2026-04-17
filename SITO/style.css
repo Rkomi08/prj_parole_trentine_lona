@@ -1,0 +1,507 @@
+/* ============================================================
+   e-Trentin — Dizionario del Dialetto di Trento
+   Foglio di stile principale (style.css)
+   ============================================================ */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── Variabili CSS (palette e tipografia) ── */
+:root {
+  /* Colori principali */
+  --clr-cream:       #f5f0e8;       /* sfondo principale caldo */
+  --clr-parchment:   #ede5d3;       /* sfondo secondario */
+  --clr-forest:      #2d4a2d;       /* verde bosco trentino */
+  --clr-forest-lt:   #3d6b3d;       /* verde più chiaro */
+  --clr-terracotta:  #b85c38;       /* terracotta / accento */
+  --clr-gold:        #c9a84c;       /* oro / accento secondario */
+  --clr-dark:        #1a1a14;       /* testo scuro */
+  --clr-mid:         #4a4a3a;       /* testo medio */
+  --clr-light-text:  #7a7a65;       /* testo chiaro / caption */
+  --clr-border:      #d4c9b0;       /* bordi sottili */
+  --clr-white:       #ffffff;
+
+  /* Tipografia */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Lora', Georgia, serif;
+  --font-ui:      'DM Sans', system-ui, sans-serif;
+
+  /* Spaziature */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  2rem;
+  --space-xl:  4rem;
+  --space-xxl: 7rem;
+
+  /* Raggi bordo */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Ombre */
+  --shadow-sm:  0 1px 4px rgba(26,26,20,.08);
+  --shadow-md:  0 4px 16px rgba(26,26,20,.12);
+  --shadow-lg:  0 12px 40px rgba(26,26,20,.16);
+
+  /* Transizioni */
+  --transition: 0.25s ease;
+}
+
+/* ── Reset e base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--clr-dark);
+  background-color: var(--clr-cream);
+  line-height: 1.7;
+  /* Pattern di sfondo: ornamento geometrico sottile */
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(201,168,76,.15) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* ── Accessibilità: focus visibile ── */
+:focus-visible {
+  outline: 2px solid var(--clr-terracotta);
+  outline-offset: 3px;
+}
+
+/* ── Utilità generali ── */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ── NAVBAR ── */
+#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(45,74,45,.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--clr-gold);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+
+/* Logo testuale nella navbar */
+.nav-logo {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.nav-logo .logo-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--clr-gold);
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+}
+
+.nav-logo .logo-sub {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 300;
+  color: rgba(245,240,232,.7);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Voci di navigazione */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,.85);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: rgba(201,168,76,.2);
+  color: var(--clr-gold);
+}
+
+/* Hamburger per mobile */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--clr-gold);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Stato aperto hamburger */
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── HEADER HERO ── */
+#site-header {
+  background: linear-gradient(160deg, var(--clr-forest) 0%, #1a301a 100%);
+  padding: var(--space-xl) 0 var(--space-lg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorazione montagne stilizzate */
+#site-header::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: var(--clr-cream);
+  clip-path: polygon(0 100%, 10% 40%, 20% 70%, 35% 20%, 50% 60%, 65% 10%, 78% 55%, 88% 30%, 100% 60%, 100% 100%);
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.header-pretitle {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin-bottom: var(--space-sm);
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 700;
+  color: var(--clr-cream);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.site-title em {
+  color: var(--clr-gold);
+  font-style: italic;
+}
+
+.site-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-style: italic;
+  color: rgba(245,240,232,.7);
+  margin-top: 0.5rem;
+  letter-spacing: 0.04em;
+}
+
+/* ── SEZIONI GENERICHE ── */
+section {
+  padding: var(--space-xl) 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 600;
+  color: var(--clr-forest);
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+}
+
+/* Sottolineatura decorativa */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--clr-terracotta), transparent);
+  margin-top: 6px;
+  border-radius: var(--radius-pill);
+}
+
+.section-title.centered {
+  display: block;
+  text-align: center;
+}
+
+.section-title.centered::after {
+  margin: 8px auto 0;
+}
+
+/* ── CARD GENERICA ── */
+.card {
+  background: var(--clr-white);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ── BADGE / CHIP ── */
+.badge {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--clr-parchment);
+  color: var(--clr-mid);
+  border: 1px solid var(--clr-border);
+}
+
+.badge.verb     { background: #e8f0e8; color: #2d5a2d; border-color: #b0d0b0; }
+.badge.noun-m   { background: #e8eef8; color: #1e3a6e; border-color: #a8c0e0; }
+.badge.noun-f   { background: #f8eaed; color: #7a1a2e; border-color: #e0a8b8; }
+.badge.adv      { background: #f8f0e0; color: #6e4a00; border-color: #e0c880; }
+.badge.prop     { background: #f0e8f8; color: #4a1a7a; border-color: #c8a0e0; }
+
+/* ── PULSANTI ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--clr-forest);
+  color: var(--clr-cream);
+  border-color: var(--clr-forest);
+}
+
+.btn-primary:hover {
+  background: var(--clr-forest-lt);
+  border-color: var(--clr-forest-lt);
+}
+
+.btn-accent {
+  background: var(--clr-terracotta);
+  color: var(--clr-white);
+  border-color: var(--clr-terracotta);
+}
+
+.btn-accent:hover {
+  background: #a04a28;
+  border-color: #a04a28;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--clr-forest);
+  border-color: var(--clr-forest);
+}
+
+.btn-outline:hover {
+  background: var(--clr-forest);
+  color: var(--clr-cream);
+}
+
+/* ── FOOTER ── */
+#site-footer {
+  background: var(--clr-dark);
+  color: rgba(245,240,232,.7);
+  padding: var(--space-xl) 0 var(--space-lg);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.footer-brand .logo-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.8rem;
+  color: var(--clr-gold);
+}
+
+.footer-brand p {
+  margin-top: var(--space-sm);
+  line-height: 1.6;
+  color: rgba(245,240,232,.6);
+}
+
+.footer-col h4 {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin-bottom: var(--space-md);
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.4rem;
+}
+
+.footer-col a {
+  color: rgba(245,240,232,.6);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer-col a:hover {
+  color: var(--clr-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  color: rgba(245,240,232,.4);
+  font-size: 0.75rem;
+}
+
+/* ── ANIMAZIONI ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.6s ease both;
+}
+
+.animate-fade {
+  animation: fadeIn 0.5s ease both;
+}
+
+/* Ritardi per stagger */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  /* Navbar mobile */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: rgba(30,50,30,.98);
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-md);
+    gap: 0.1rem;
+    border-bottom: 2px solid var(--clr-gold);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  /* Footer mobile */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
